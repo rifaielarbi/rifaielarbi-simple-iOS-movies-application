@@ -44,7 +44,6 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        // Set the title for the navigation bar
         title = "Movie Details"
         
         view.addSubview(movieImageView)

@@ -14,7 +14,7 @@ class NetworkLayer {
     private init() {}
     
     private let baseURL = "https://api.themoviedb.org/3"
-    private let apiKey = "c9856d0cb57c3f14bf75bdc6c063b8f3" // Replace with your actual API key
+    private let apiKey = "c9856d0cb57c3f14bf75bdc6c063b8f3"
     
     // MARK: - HTTP Methods
     
@@ -23,11 +23,11 @@ class NetworkLayer {
         allParameters["api_key"] = apiKey
         
         let url = baseURL + endpoint
-        print("Requesting URL: \(url)") // Debugging line
-        print("Parameters: \(allParameters)") // Debugging line
+        print("Requesting URL: \(url)")
+        print("Parameters: \(allParameters)")
         
         AF.request(url, method: .get, parameters: allParameters).responseDecodable(of: T.self) { response in
-            print("Response: \(response)") // Debugging line
+            print("Response: \(response)") 
             switch response.result {
             case .success(let value):
                 print("Success: \(value)") // Debugging line

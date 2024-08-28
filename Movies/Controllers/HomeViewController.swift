@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
         return searchController
     }()
 
-    private let viewModel = MoviesViewModel() // Instance de ViewModel
+    private let viewModel = MoviesViewModel() 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +30,13 @@ class HomeViewController: UIViewController {
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
 
-        // Configure navigation bar
         title = "Movies"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
 
-        // Enable large titles
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
 
-        // Customize large title appearance
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.largeTitleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 34)]
@@ -48,14 +45,14 @@ class HomeViewController: UIViewController {
 
         // Fetch movies
         viewModel.onMoviesFetched = { [weak self] in
-            self?.homeFeedTable.reloadData() // Reload table view with fetched movies
+            self?.homeFeedTable.reloadData()
         }
 
         viewModel.onError = { [weak self] error in
-            self?.showErrorAlert(message: error) // Show error alert
+            self?.showErrorAlert(message: error)
         }
 
-        viewModel.fetchTrendingMovies() // Fetch movies
+        viewModel.fetchTrendingMovies()
     }
 
     override func viewDidLayoutSubviews() {
@@ -63,7 +60,6 @@ class HomeViewController: UIViewController {
         homeFeedTable.frame = view.bounds
     }
 
-    // Helper method to show error alert
     private func showErrorAlert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -80,7 +76,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.movies.count // Use movies count
+        return viewModel.movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,6 +90,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150 // Set a fixed height for each cell
+        return 150
     }
 }
